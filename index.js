@@ -21,11 +21,11 @@ try {
 
   fs.readFile(gradlePath, 'utf8', function (err, data) {
     let newGradle = data
-    if (versionCode.length > 0) {
-      newGradle = newGradle.replace(versionCodeRegexPattern, `$1${versionCode}`)
+    if (versionCodeUpdate.length > 0) {
+      newGradle = newGradle.replace(versionCodeRegexPattern, `$1${versionCodeUpdate}`)
     }
-    if (versionName.length > 0) {
-      newGradle = newGradle.replace(versionNameRegexPattern, `$1\"${versionName}\"`)
+    if (versionNameUpdate.length > 0) {
+      newGradle = newGradle.replace(versionNameRegexPattern, `$1\"${versionNameUpdate}\"`)
     }
     const setOutputs = (err) => {
       if (err) {
@@ -36,16 +36,16 @@ try {
         core.setOutput('versionName', newGradle.match(versionNameRegexPattern)[2])
       }
     }
-    if (versionCode.length > 0 || versionName.length > 0) {
+    if (versionCodeUpdate.length > 0 || versionNameUpdate.length > 0) {
       fs.writeFile(gradlePath, newGradle, function (err) {
         if (err) {
           throw err
         }
-        if (versionCode.length > 0) {
-          console.log(`Successfully override version code ${versionCode}`)
+        if (versionCodeUpdate.length > 0) {
+          console.log(`Successfully override version code ${versionCodeUpdate}`)
         }
-        if (versionName.length > 0) {
-          console.log(`Successfully override version code ${versionName}`)
+        if (versionNameUpdate.length > 0) {
+          console.log(`Successfully override version code ${versionNameUpdate}`)
         }
         setOutputs()
       })
