@@ -1,0 +1,21 @@
+name: 'Get/Update Android Version'
+description: 'Get (and possibly update) the versionCode and versionName in the android/app/build.gradle file'
+inputs:
+  gradlePath:
+    description: 'Path to build.gradle'
+    required: true
+    default: 'android/app/build.gradle'
+  versionCodeUpdate:
+    description: 'Optional new value for versionCode'
+    required: false
+  versionNameUpdate:
+    description: 'Optional new value for versionName'
+    require: false
+outputs:
+  versionCode:
+    description: 'Final value of versionCode'
+  versionName:
+    description: 'Final value of versionName'
+runs:
+  using: 'node12'
+  main: 'index.js'
